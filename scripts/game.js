@@ -72,7 +72,21 @@ class Game {
   createWords = () => {
     const x = Math.random() * this.canvas.width;
     const y = Math.random() * this.canvas.height;
+
     const randomIndex = Math.floor(Math.random() * this.words.length);
+
+    let allIndex = [];
+    allIndex.push(randomIndex);
+
+    console.log(allIndex);
+
+    // if (randomIndex === randomIndex) {
+    //   randomIndex.slice(randomIndex, 1);
+    //   console.log('matched');
+    // }
+
+    // console.log(randomIndex);
+
     const dX = this.center.x - x;
     const dY = this.center.y - y;
     const norm = Math.sqrt(dX ** 2 + dY ** 2);

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title></title>
+    <meta name="description" content="A tower defense like typing game" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="startView">
+      <!-- <h1>Hyper Typing Markup Language</h1> -->
+
+      <div>
+        <label for="difficultyOptions">Choose a difficulty:</label>
+        <select id="difficultyOptions">
+          <option value="difficultyOptions">--Please choose an option--</option>
+          <option value="novice">Novice</option>
+          <option value="intermediate">Intermediate</option>
+          <option value="expert">Expert</option>
+          <option value="bonus">Bonus</option>
+        </select>
+      </div>
+
+      <div class="button_slide slide_right" id="startButton">
+        START
+      </div>
+
+      <!-- <div
+        class="button_slide slide_right"
+        id="startButton"
+        type="button"
+        onclick="difficultOption()"
+      >
+        START
+      </div> -->
+    </div>
+
+    <div id="gameView">
+      <canvas id="canvas">Your browser doesn't support HTML5.</canvas>
+      <div id="typedWords"></div>
+    </div>
+
+    <div id="endView">
+      <h4 id="wpmResult"></h4>
+      <h4 id="accuracy"></h4>
+      <h4 id="rightKeystrokes"></h4>
+      <h4 id="wrongKeystrokes"></h4>
+      <h4 id="totalKeystrokes"></h4>
+    </div>
+
+    <script src="./scripts/database.js"></script>
+    <script src="./scripts/variables.js"></script>
+    <script src="./scripts/levels.js"></script>
+    <script src="./scripts/word.js"></script>
+    <script src="./scripts/particle.js"></script>
+    <script src="./scripts/game.js"></script>
+    <script src="./scripts/main.js"></script>
+  </body>
+</html>

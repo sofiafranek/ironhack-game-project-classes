@@ -3,11 +3,6 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const getTime = typeof performance === 'function' ? performance.now : Date.now;
-const FRAME_THRESHOLD = 300;
-const FRAME_DURATION = 1000 / 58;
-let then = getTime();
-
 const startButton = document.querySelector('#startButton');
 let typedWords = document.querySelector('#typedWords');
 let wpmResult = document.querySelector('#wpmResult');
@@ -22,9 +17,8 @@ const startView = document.querySelector('#startView');
 const gameView = document.querySelector('#gameView');
 const endView = document.querySelector('#endView');
 
-console.log('Hi there!');
-
 startButton.addEventListener('click', function() {
-  const game = new Game(canvas, 2.5, 1.5, 60);
+  const game = new Game(canvas, 0.5, 1.5, 60);
+  // levelDecider();
   game.startGame();
 });

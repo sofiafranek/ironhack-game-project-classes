@@ -70,7 +70,6 @@ class Game {
   };
 
   createWords = () => {
-    //console.log(this.words.length);
     const x = Math.random() * this.canvas.width;
     const y = Math.random() * this.canvas.height;
     const randomIndex = Math.floor(Math.random() * this.words.length);
@@ -83,15 +82,6 @@ class Game {
     this.words = [...this.words, newWord];
   };
 
-  //think of removing the words when they are out of the canvas.
-
-  // removewords = () => {
-  //   for (const w of this.words) {
-  //     w.x += w.speedX * frames;
-  //     w.y += w.speedY * frames;
-  //   }
-  // };
-
   type = i => {
     this.words.splice(i, 1);
     this.score++;
@@ -102,8 +92,6 @@ class Game {
       .split('')
       .splice(0, this.string.length - 1)
       .join('');
-    // arrStr.forEach(element => console.log(element));
-    // backspaceStr = string.slice(0, -1);
   };
 
   keyDownHandler() {
@@ -120,6 +108,7 @@ class Game {
   checkWordMatch() {
     window.addEventListener('keydown', e => {
       let foundWord = 0;
+
       if (e.keyCode === 32 || e.keyCode === 13) {
         for (let i = this.words.length - 1; i >= 0; i--) {
           foundWord = this.words[i].value.localeCompare(this.string);
@@ -140,11 +129,12 @@ class Game {
         }
         if (foundWord === -1 || foundWord === 1) {
           this.wrongKeystrokes.push(this.string);
-          this.string = '';
-          //animateCSS('#typedWords', 'shake');
-          // string = '';
+          animateCSS('#typedWords', 'shake');
+          setTimeout(() => {
+            this.string = '';
+          }, 500);
         }
-        // string = '';
+        // this.string = '';
       }
     });
   }
@@ -205,11 +195,23 @@ class Game {
     ctx.fillText('Score: ' + this.score, this.label.left, this.label.margin);
     typedWords.innerHTML = `${this.string}`;
     ctx.fillText('Timer: ' + this.time, this.label.right, this.label.margin);
-    // processParticles(frames);
 
-    //removewords(frames);
     if (this.isRunning) {
       window.requestAnimationFrame(this.loop);
     }
   };
 }
+
+const animateCSS = (element, animationName, callback) => {
+  const node = document.querySelector(element);
+  node.classList.add('animated', animationName);
+
+  function handleAnimationEnd() {
+    node.classList.remove('animated', animationName);
+    node.removeEventListener('animationend', handleAnimationEnd);
+
+    if (typeof callback === 'function') callback();
+  }
+
+  node.addEventListener('animationend', handleAnimationEnd);
+};

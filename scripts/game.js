@@ -17,8 +17,8 @@ class Game {
       color: 'black',
       size: 30,
       highestSpeed: highestSpeed, //1.6,
-      lowestSpeed: lowestSpeed, //0.6,
-      probability: 0.03
+      lowestSpeed: lowestSpeed //0.6,
+      // probability: 0.03
     };
     this.label = {
       font: '22px Lato',
@@ -66,11 +66,10 @@ class Game {
         this.counterTimer = 60;
         this.endResults();
         this.isRunning = !this.isRunning;
-      } else if (this.counterTimer === 58) {
-        const object = new Object();
-        // console.log(object);
-        this.snow = object;
       }
+      // else if (this.counterTimer === 58) {
+      //   this.createObjects();
+      // }
     }, 1000);
   };
 
@@ -78,10 +77,23 @@ class Game {
     this.startingTheTimer();
   };
 
+  createObjects = () => {
+    const x = Math.random() * this.canvas.width;
+    const y = Math.random() * this.canvas.height;
+    const dX = this.center.x - x;
+    const dY = this.center.y - y;
+    const norm = Math.sqrt(dX ** 2 + dY ** 2);
+    const speed = this.generateRandomNumber(this.word.lowestSpeed, this.word.highestSpeed);
+    const object = new Object(this, (dX / norm) * speed, (dY / norm) * speed, speed);
+
+    console.log(object);
+    this.snow = object;
+  };
+
+  // dividing arrayOfWords into seperate arrays
   createWordLength = () => {
     for (const element in arrayOfWords) {
       let strLength = arrayOfWords[element].length;
-      // console.log(`${element}: ${arrayOfWords[element]} : ${strLength}`);
 
       if (strLength <= 5) {
         let noviceWords = arrayOfWords[element];
@@ -98,12 +110,14 @@ class Game {
     }
   };
 
+  // creation of words that will be drawn on the canvas
   createWords = () => {
     const x = Math.random() * this.canvas.width;
     const y = Math.random() * this.canvas.height;
 
     const randomIndex = Math.floor(Math.random() * this.words.length);
 
+    // choosing which array to use depending on level selection
     switch (this.level) {
       case 1:
         this.array = this.novieArr;
@@ -123,47 +137,6 @@ class Game {
 
     const randomWordIndex = this.array[randomIndex];
 
-    //before creating, we need to make sure that randomWordIndex satisfies a set of conditions
-    //one: the value should not be in the this.words array.
-    //two: the length of the value should be such that satisfies the needed length for the level
-    // if (this.words.indexOf(randomWordIndex) < 0) {
-    //   console.log('index');
-    //   //this means that the word is not in my array of words
-    //   //need to check the length
-    //   switch (this.level) {
-    //     case 1:
-    //       if (randomWordIndex.length < 5) {
-    //         return randomWordIndex;
-    //       }
-    //       break;
-    //     case 2:
-    //       if (randomWordIndex.length < 8) {
-    //         return randomWordIndex;
-    //       }
-    //       break;
-    //     case 3:
-    //       if (randomWordIndex.length < 1) {
-    //         return randomWordIndex;
-    //       }
-    //       break;
-    //   }
-    //   const dX = this.center.x - x;
-    //   const dY = this.center.y - y;
-    //   const norm = Math.sqrt(dX ** 2 + dY ** 2);
-    //   const speed = this.generateRandomNumber(this.word.lowestSpeed, this.word.highestSpeed);
-    //   const newWord = new Word(
-    //     this,
-    //     x,
-    //     y,
-    //     (dX / norm) * speed,
-    //     (dY / norm) * speed,
-    //     randomWordIndex
-    //   );
-    //   this.words = [...this.words, newWord];
-    // } else {
-    //   this.createWords();
-    // }
-
     const dX = this.center.x - x;
     const dY = this.center.y - y;
     const norm = Math.sqrt(dX ** 2 + dY ** 2);
@@ -172,6 +145,7 @@ class Game {
     this.words = [...this.words, newWord];
   };
 
+  // removing the word and incrementing the score
   type = i => {
     this.words.splice(i, 1);
     this.score++;
@@ -228,6 +202,7 @@ class Game {
     });
   }
 
+  // working out the statistics for the end of the game
   totalCharacters = () => {
     for (let i = 0, length = this.arrStrings.length; i < length; i++) {
       this.sum += this.arrStrings[i];
@@ -244,6 +219,7 @@ class Game {
     this.accuracy = Math.floor((this.totalCorrectCharacters / this.totalKeyStrokes) * 100);
   };
 
+  // all results to be printed to the HTML
   endResults = () => {
     this.totalCharacters();
     wpmResult.innerHTML = `WPM: ${this.wpm}`;
@@ -276,6 +252,10 @@ class Game {
     if (this.gameTime < timestamp - this.gameSpeed) {
       this.gameTime = timestamp;
       this.createWords();
+    }
+
+    if (this.counterTimer === 58) {
+      this.createObjects();
     }
 
     if (this.particles) {

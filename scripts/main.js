@@ -18,7 +18,6 @@ const gameView = document.querySelector('#gameView');
 const endView = document.querySelector('#endView');
 
 startButton.addEventListener('click', function() {
-  const game = new Game(canvas, 0.5, 1.5, 60);
-  // difficultOption();
-  game.startGame();
+  // const game = new Game(canvas, 0.5, 1.5, 60);
+  difficultOption();
 });

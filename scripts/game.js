@@ -42,6 +42,7 @@ class Game {
     this.isRunning = true;
     this.maxTime = maxTime;
     this.allIndex = [];
+    this.createWordLength();
   }
 
   startGame() {
@@ -68,6 +69,23 @@ class Game {
 
   timerInit = () => {
     this.startingTheTimer();
+  };
+
+  createWordLength = () => {
+    arrayOfWords.forEach(string => {
+      string.length;
+
+      // if (string.length > 0 && string.length < 5) {
+      //   wordLengthArray.push(arrayOfWords);
+      //   console.log(wordLengthArray.push(arrayOfWords));
+      // }
+      // if () {
+      //   wordLengthArray.push(arrayOfWords)
+      // }
+      // if () {
+      //   wordLengthArray.push(arrayOfWords)
+      // }
+    });
   };
 
   createWords = () => {
@@ -144,7 +162,6 @@ class Game {
             this.string = '';
           }, 500);
         }
-        // this.string = '';
       }
     });
   }

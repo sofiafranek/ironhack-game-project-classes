@@ -66,9 +66,10 @@ class Game {
         this.counterTimer = 60;
         this.endResults();
         this.isRunning = !this.isRunning;
-      } else if (this.counterTimer === 2) {
+      } else if (this.counterTimer === 58) {
         const object = new Object();
-        console.log(object);
+        // console.log(object);
+        this.snow = object;
       }
     }, 1000);
   };
@@ -264,6 +265,9 @@ class Game {
       w.moveWord();
     }
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    if (this.snow) {
+      this.snow.drawObject();
+    }
     ctx.font = this.word.font;
     ctx.fillStyle = this.word.color;
     for (let w of this.words) {

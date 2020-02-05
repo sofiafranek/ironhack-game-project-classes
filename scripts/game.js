@@ -47,6 +47,7 @@ class Game {
     this.novieArr = [];
     this.intermediateArr = [];
     this.expertArr = [];
+    this.createWordLength();
   }
 
   startGame() {

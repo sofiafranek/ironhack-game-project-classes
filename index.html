@@ -3,27 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <title></title>
+    <title>Hyper Typer</title>
     <meta name="description" content="A tower defense like typing game" />
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <div id="startView">
-      <!-- <h1>Hyper Typing Markup Language</h1> -->
+    <div class="background" id="startView">
+      <div class="inner">
+        <h1>Hyper Typing</h1>
 
-      <div>
-        <label for="difficultyOptions">Choose a difficulty:</label>
-        <select id="difficultyOptions">
-          <option value="difficultyOptions">--Please choose an option--</option>
-          <option value="novice">Novice</option>
-          <option value="intermediate">Intermediate</option>
-          <option value="expert">Expert</option>
-          <option value="bonus">Bonus</option>
-        </select>
+        <div>
+          <label for="difficultyOptions">Choose a difficulty:</label>
+          <select id="difficultyOptions">
+            <option value="difficultyOptions">--Please choose an option--</option>
+            <option value="novice">Novice</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="expert">Expert</option>
+            <option value="bonus">Bonus</option>
+          </select>
+        </div>
+
+        <div class="button_slide slide_right" id="startButton">START</div>
       </div>
-
-      <div class="button_slide slide_right" id="startButton">START</div>
     </div>
 
     <div id="gameView">

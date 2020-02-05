@@ -41,7 +41,6 @@ class Game {
     this.gameTime = 0;
     this.isRunning = true;
     this.maxTime = maxTime;
-    // this.allIndex = [];
     this.array;
     this.level = level;
     this.novieArr = [];
@@ -68,6 +67,9 @@ class Game {
         this.counterTimer = 0;
         this.endResults();
         this.isRunning = !this.isRunning;
+      } else if (this.counterTimer === 2) {
+        const object = new Object(60, 100);
+        console.log(object);
       }
     }, 1000);
   };
@@ -79,7 +81,7 @@ class Game {
   createWordLength = () => {
     for (const element in arrayOfWords) {
       let strLength = arrayOfWords[element].length;
-      console.log(`${element}: ${arrayOfWords[element]} : ${strLength}`);
+      // console.log(`${element}: ${arrayOfWords[element]} : ${strLength}`);
 
       if (strLength <= 5) {
         let noviceWords = arrayOfWords[element];
@@ -87,7 +89,6 @@ class Game {
       }
       if (strLength > 5 && strLength <= 10) {
         let intermediateWords = arrayOfWords[element];
-        console.log(this.intermediateArr);
         this.intermediateArr.push(intermediateWords);
       }
       if (strLength > 6) {
@@ -95,9 +96,9 @@ class Game {
         this.expertArr.push(expertWords);
       }
 
-      console.log(this.novieArr);
-      console.log(this.intermediateArr);
-      console.log(this.expertArr);
+      // console.log(this.novieArr);
+      // console.log(this.intermediateArr);
+      // console.log(this.expertArr);
     }
   };
 
@@ -125,7 +126,6 @@ class Game {
     }
 
     const randomWordIndex = this.array[randomIndex];
-    // console.log(randomWordIndex);
 
     //before creating, we need to make sure that randomWordIndex satisfies a set of conditions
     //one: the value should not be in the this.words array.

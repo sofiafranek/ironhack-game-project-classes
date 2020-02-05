@@ -1,17 +1,14 @@
-class Object extends Word {
-  constructor(game, posX, posY, speedX, speedY) {
-    super(game, posX, posY, speedX, speedY);
-    const snowflake = {
-      snowflakeWidth: 200,
-      snowflakeHeight: 200,
-      snowflake: new Image()
-    };
-    snowflake.src = 'images/snowflake.jpg';
+class Object {
+  constructor() {
+    this.canvas = canvas;
+    this.x = Math.random() * this.canvas.width;
+    this.y = Math.random() * this.canvas.height;
+    this.context = canvas.getContext('2d');
+    this.image = new Image();
+    this.image.src = 'images/snowflake.jpg';
+    this.image.onload = this.context.drawImage(this.image, 500, 500);
+    // this.pauseAnimation();
   }
-
-  drawSnowflake = () => {
-    this.context.drawImage(snowflake.src, posX, poY);
-  };
 
   pauseAnimation = () => {
     // stop the animation
@@ -20,9 +17,3 @@ class Object extends Word {
     // the object is cleared from the canvas
   };
 }
-
-// this.image = new Image();
-// console.log(this.image);
-// this.image.src = 'images/snowflake.jpg';
-// console.log(this.image.src);
-// this.image.onload = this.context.drawImage(this.image, 500, 500);

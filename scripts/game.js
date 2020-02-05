@@ -1,9 +1,9 @@
 class Game {
-  constructor(canvas, highestSpeed, lowestSpeed, maxTime, level) {
+  constructor(canvas, highestSpeed, lowestSpeed, level) {
     this.canvas = canvas;
     this.context = canvas.getContext('2d');
-    this.counterTimer = 0;
-    this.time = 0;
+    this.counterTimer = 60;
+    this.time = 60;
     this.wpm = 0;
     this.totalCorrectCharacters = 0;
     this.totalWrongCharacters = 0;
@@ -40,7 +40,6 @@ class Game {
     this.gameSpeed = 400;
     this.gameTime = 0;
     this.isRunning = true;
-    this.maxTime = maxTime;
     this.array;
     this.level = level;
     this.novieArr = [];
@@ -58,13 +57,13 @@ class Game {
   }
 
   startingTheTimer = () => {
-    this.counterTimer = 0;
+    this.counterTimer = 60;
     const timer = setInterval(() => {
-      this.counterTimer += 1;
+      this.counterTimer -= 1;
       this.time = this.counterTimer;
-      if (this.counterTimer === this.maxTime) {
+      if (this.counterTimer === 0) {
         clearInterval(timer);
-        this.counterTimer = 0;
+        this.counterTimer = 60;
         this.endResults();
         this.isRunning = !this.isRunning;
       } else if (this.counterTimer === 2) {
@@ -95,10 +94,6 @@ class Game {
         let expertWords = arrayOfWords[element];
         this.expertArr.push(expertWords);
       }
-
-      // console.log(this.novieArr);
-      // console.log(this.intermediateArr);
-      // console.log(this.expertArr);
     }
   };
 
@@ -245,7 +240,7 @@ class Game {
     }
 
     this.totalKeyStrokes = this.totalCorrectCharacters + this.totalWrongCharacters;
-    this.accuracy = (this.totalCorrectCharacters / this.totalKeyStrokes) * 100;
+    this.accuracy = Math.floor((this.totalCorrectCharacters / this.totalKeyStrokes) * 100);
   };
 
   endResults = () => {

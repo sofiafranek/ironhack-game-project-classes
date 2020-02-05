@@ -21,8 +21,6 @@ const endView = document.querySelector('#endView');
 let difficulty = document.getElementById('difficultyOptions');
 let selectedValue = difficulty.options['selectedIndex'];
 
-message.style.display = 'none';
-
 startButton.addEventListener('click', function() {
   difficultOption();
 });

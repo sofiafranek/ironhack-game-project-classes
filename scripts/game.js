@@ -1,5 +1,5 @@
 class Game {
-  constructor(canvas, highestSpeed, lowestSpeed, maxTime) {
+  constructor(canvas, highestSpeed, lowestSpeed, maxTime, array) {
     this.canvas = canvas;
     this.context = canvas.getContext('2d');
     this.counterTimer = 0;
@@ -43,6 +43,7 @@ class Game {
     this.maxTime = maxTime;
     this.allIndex = [];
     this.createWordLength();
+    this.array = array;
   }
 
   startGame() {
@@ -72,20 +73,31 @@ class Game {
   };
 
   createWordLength = () => {
-    arrayOfWords.forEach(string => {
-      string.length;
+    const novieArr = [];
+    const intermediateArr = [];
+    const expertArr = [];
 
-      // if (string.length > 0 && string.length < 5) {
-      //   wordLengthArray.push(arrayOfWords);
-      //   console.log(wordLengthArray.push(arrayOfWords));
-      // }
-      // if () {
-      //   wordLengthArray.push(arrayOfWords)
-      // }
-      // if () {
-      //   wordLengthArray.push(arrayOfWords)
-      // }
-    });
+    for (const element in arrayOfWords) {
+      let strLength = arrayOfWords[element].length;
+      // console.log(`${element}: ${arrayOfWords[element]} : ${strLength}`);
+
+      if (strLength <= 5) {
+        let noviceWords = arrayOfWords[element];
+        novieArr.push(noviceWords);
+      }
+      if (strLength > 5 && strLength <= 10) {
+        let intermediateWords = arrayOfWords[element];
+        intermediateArr.push(intermediateWords);
+      }
+      if (strLength > 10) {
+        let expertWords = arrayOfWords[element];
+        expertArr.push(expertWords);
+      }
+
+      console.log(novieArr);
+      console.log(intermediateArr);
+      console.log(expertArr);
+    }
   };
 
   createWords = () => {

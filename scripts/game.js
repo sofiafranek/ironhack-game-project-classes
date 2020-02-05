@@ -221,11 +221,11 @@ class Game {
   // all results to be printed to the HTML
   endResults = () => {
     this.totalCharacters();
-    wpmResult.innerHTML = `WPM: ${this.wpm}`;
+    wpmResult.innerHTML = `Word Per Minute: ${this.wpm}`;
     accuracy.innerHTML = `Accuracy: ${this.accuracy}%`;
-    rightKeystroke.innerHTML = `Correct Keystrokes: ${this.totalCorrectCharacters}`;
-    wrongKeystroke.innerHTML = `Wrong Keystrokes: ${this.totalWrongCharacters}`;
     totalKeystrokes.innerHTML = `Total Keystrokes: ${this.totalKeyStrokes}`;
+    rightKeystroke.innerHTML = `${this.totalCorrectCharacters}`;
+    wrongKeystroke.innerHTML = `${this.totalWrongCharacters}`;
     gameView.style.display = 'none';
     endView.style.display = 'block';
   };

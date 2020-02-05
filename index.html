@@ -16,7 +16,7 @@
         <p>
           If you see the snowflake type 'FREEZE'.
         </p>
-        <div>
+        <div class="options">
           <label for="difficultyOptions">Choose a difficulty:</label>
           <select id="difficultyOptions">
             <option value="difficultyOptions">--Please choose an option--</option>
@@ -25,6 +25,7 @@
             <option value="expert">Expert</option>
             <option value="bonus">Bonus</option>
           </select>
+          <p class="animated shake" id="message">Remember to pick a difficulty!</p>
         </div>
 
         <div class="button_slide slide_right animated" id="startButton">START</div>
@@ -37,11 +38,18 @@
     </div>
 
     <div id="endView">
+      <h1>Results</h1>
+      <h3>
+        Let's see how well you did.
+      </h3>
       <h4 id="wpmResult"></h4>
       <h4 id="accuracy"></h4>
-      <h4 id="rightKeystrokes"></h4>
-      <h4 id="wrongKeystrokes"></h4>
       <h4 id="totalKeystrokes"></h4>
+      <div class="flex">
+        <h4 id="rightKeystrokes"></h4>
+        <h4>|</h4>
+        <h4 id="wrongKeystrokes"></h4>
+      </div>
     </div>
 
     <script src="./scripts/database.js"></script>

@@ -10,6 +10,7 @@ let rightKeystroke = document.querySelector('#rightKeystrokes');
 let wrongKeystroke = document.querySelector('#wrongKeystrokes');
 let accuracy = document.querySelector('#accuracy');
 let totalKeystrokes = document.querySelector('#totalKeystrokes');
+const message = document.querySelector('#message');
 
 let difficultyOptions = document.querySelector('#difficultyOptions');
 
@@ -20,12 +21,8 @@ const endView = document.querySelector('#endView');
 let difficulty = document.getElementById('difficultyOptions');
 let selectedValue = difficulty.options['selectedIndex'];
 
-startButton.disabled = true;
+message.style.display = 'none';
 
 startButton.addEventListener('click', function() {
-  // animateCSS('#startButton', 'hinge');
-  // setTimeout(() => {
-  //   difficultOption();
-  // }, 2000);
   difficultOption();
 });

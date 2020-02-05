@@ -374,9 +374,28 @@ label {
   padding-right: 25px;
 }
 
+#totalKeystrokes {
+  margin-bottom: 0;
+}
+
+#message {
+  display: block;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  margin-left: 0;
+  margin-right: 0;
+  font-size: 0.8em;
+}
+
+.options {
+  position: relative;
+}
+
 .button_slide {
   letter-spacing: 2px;
-  margin-top: 30px;
+  margin-top: 55px;
   color: black;
   border: 3px solid #3399ff;
   border-radius: 0px;
@@ -397,6 +416,19 @@ label {
 
 .difficultyOptions span {
   margin: 0 15px 0 5px;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#rightKeystrokes {
+  color: green;
+}
+
+#wrongKeystrokes {
+  color: red;
 }
 
 #startView {
@@ -420,4 +452,8 @@ label {
   display: none;
   align-items: center;
   margin: auto;
+}
+
+#endView h3 {
+  margin-bottom: 40px;
 }

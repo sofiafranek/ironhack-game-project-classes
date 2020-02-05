@@ -68,7 +68,7 @@ class Game {
         this.endResults();
         this.isRunning = !this.isRunning;
       } else if (this.counterTimer === 2) {
-        const object = new Object(60, 100);
+        const object = new Object();
         console.log(object);
       }
     }, 1000);

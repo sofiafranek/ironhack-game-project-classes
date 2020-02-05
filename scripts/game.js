@@ -41,10 +41,12 @@ class Game {
     this.gameTime = 0;
     this.isRunning = true;
     this.maxTime = maxTime;
-    this.allIndex = [];
-    // this.createWordLength();
-    // this.array = array;
+    // this.allIndex = [];
+    this.array;
     this.level = level;
+    this.novieArr = [];
+    this.intermediateArr = [];
+    this.expertArr = [];
   }
 
   startGame() {
@@ -73,29 +75,30 @@ class Game {
     this.startingTheTimer();
   };
 
-  // createWordLength = () => {
-  //   for (const element in arrayOfWords) {
-  //     let strLength = arrayOfWords[element].length;
-  //     // console.log(`${element}: ${arrayOfWords[element]} : ${strLength}`);
+  createWordLength = () => {
+    for (const element in arrayOfWords) {
+      let strLength = arrayOfWords[element].length;
+      console.log(`${element}: ${arrayOfWords[element]} : ${strLength}`);
 
-  //     if (strLength <= 5) {
-  //       let noviceWords = arrayOfWords[element];
-  //       this.array = novieArr.push(noviceWords);
-  //     }
-  //     if (strLength > 5 && strLength <= 10) {
-  //       let intermediateWords = arrayOfWords[element];
-  //       this.array = intermediateArr.push(intermediateWords);
-  //     }
-  //     if (strLength > 10) {
-  //       let expertWords = arrayOfWords[element];
-  //       this.array = expertArr.push(expertWords);
-  //     }
+      if (strLength <= 5) {
+        let noviceWords = arrayOfWords[element];
+        this.novieArr.push(noviceWords);
+      }
+      if (strLength > 5 && strLength <= 10) {
+        let intermediateWords = arrayOfWords[element];
+        console.log(this.intermediateArr);
+        this.intermediateArr.push(intermediateWords);
+      }
+      if (strLength > 6) {
+        let expertWords = arrayOfWords[element];
+        this.expertArr.push(expertWords);
+      }
 
-  //     console.log(novieArr);
-  //     console.log(intermediateArr);
-  //     console.log(expertArr);
-  //   }
-  // };
+      console.log(this.novieArr);
+      console.log(this.intermediateArr);
+      console.log(this.expertArr);
+    }
+  };
 
   createWords = () => {
     const x = Math.random() * this.canvas.width;
@@ -103,54 +106,73 @@ class Game {
 
     const randomIndex = Math.floor(Math.random() * this.words.length);
 
-    // removes duplicate indexes
-    if (randomIndex > -1) {
-      arrayOfWords.splice(randomIndex, 1);
+    switch (this.level) {
+      case 1:
+        this.array = this.novieArr;
+        break;
+      case 2:
+        this.array = this.intermediateArr;
+        break;
+      case 3:
+        this.array = this.expertArr;
+        break;
     }
 
-    const randomWordIndex = arrayOfWords[randomIndex];
+    // removes duplicate indexes
+    if (randomIndex > -1) {
+      this.array.splice(randomIndex, 1);
+    }
+
+    const randomWordIndex = this.array[randomIndex];
     // console.log(randomWordIndex);
 
     //before creating, we need to make sure that randomWordIndex satisfies a set of conditions
     //one: the value should not be in the this.words array.
     //two: the length of the value should be such that satisfies the needed length for the level
-    if (this.words.indexOf(randomWordIndex) < 0) {
-      console.log('index');
-      //this means that the word is not in my array of words
-      //need to check the length
-      switch (this.level) {
-        case 1:
-          if (randomWordIndex.length < 5) {
-            return randomWordIndex;
-          }
-          break;
-        case 2:
-          if (randomWordIndex.length < 10) {
-            return randomWordIndex;
-          }
-          break;
-        case 3:
-          if (randomWordIndex.length < 15) {
-            return randomWordIndex;
-          }
-          break;
-      }
-      const dX = this.center.x - x;
-      const dY = this.center.y - y;
-      const norm = Math.sqrt(dX ** 2 + dY ** 2);
-      const speed = this.generateRandomNumber(this.word.lowestSpeed, this.word.highestSpeed);
-      const newWord = new Word(
-        this,
-        x,
-        y,
-        (dX / norm) * speed,
-        (dY / norm) * speed,
-        randomWordIndex
-      );
-      this.words = [...this.words, newWord];
-    } else {
-      this.createWords();
-    }
+    // if (this.words.indexOf(randomWordIndex) < 0) {
+    //   console.log('index');
+    //   //this means that the word is not in my array of words
+    //   //need to check the length
+    //   switch (this.level) {
+    //     case 1:
+    //       if (randomWordIndex.length < 5) {
+    //         return randomWordIndex;
+    //       }
+    //       break;
+    //     case 2:
+    //       if (randomWordIndex.length < 8) {
+    //         return randomWordIndex;
+    //       }
+    //       break;
+    //     case 3:
+    //       if (randomWordIndex.length < 1) {
+    //         return randomWordIndex;
+    //       }
+    //       break;
+    //   }
+    //   const dX = this.center.x - x;
+    //   const dY = this.center.y - y;
+    //   const norm = Math.sqrt(dX ** 2 + dY ** 2);
+    //   const speed = this.generateRandomNumber(this.word.lowestSpeed, this.word.highestSpeed);
+    //   const newWord = new Word(
+    //     this,
+    //     x,
+    //     y,
+    //     (dX / norm) * speed,
+    //     (dY / norm) * speed,
+    //     randomWordIndex
+    //   );
+    //   this.words = [...this.words, newWord];
+    // } else {
+    //   this.createWords();
+    // }
+
+    const dX = this.center.x - x;
+    const dY = this.center.y - y;
+    const norm = Math.sqrt(dX ** 2 + dY ** 2);
+    const speed = this.generateRandomNumber(this.word.lowestSpeed, this.word.highestSpeed);
+    const newWord = new Word(this, x, y, (dX / norm) * speed, (dY / norm) * speed, randomWordIndex);
+    this.words = [...this.words, newWord];
   };
 
   type = i => {

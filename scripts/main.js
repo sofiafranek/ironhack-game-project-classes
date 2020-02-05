@@ -17,6 +17,11 @@ const startView = document.querySelector('#startView');
 const gameView = document.querySelector('#gameView');
 const endView = document.querySelector('#endView');
 
+// window.onload = function(e) {
+//   console.log('hello');
+//   this.game.createWordLength();
+// };
+
 startButton.addEventListener('click', function() {
   difficultOption();
 });

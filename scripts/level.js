@@ -1,4 +1,4 @@
-const levelDecider = () => {
+const difficultOption = () => {
   let difficulty = document.getElementById('difficultyOptions');
   let selectedValue = difficulty.options[difficulty.selectedValue].value;
   if (selectedValue === 'novice') {

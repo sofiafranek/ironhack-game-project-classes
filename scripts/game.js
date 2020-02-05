@@ -41,6 +41,7 @@ class Game {
     this.gameTime = 0;
     this.isRunning = true;
     this.maxTime = maxTime;
+    this.allIndex = [];
   }
 
   startGame() {
@@ -75,23 +76,18 @@ class Game {
 
     const randomIndex = Math.floor(Math.random() * this.words.length);
 
-    let allIndex = [];
-    allIndex.push(randomIndex);
+    // removes duplicate indexes
+    if (randomIndex > -1) {
+      arrayOfWords.splice(randomIndex, 1);
+    }
 
-    console.log(allIndex);
-
-    // if (randomIndex === randomIndex) {
-    //   randomIndex.slice(randomIndex, 1);
-    //   console.log('matched');
-    // }
-
-    // console.log(randomIndex);
+    const randomWordIndex = arrayOfWords[randomIndex];
+    // console.log(randomWordIndex);
 
     const dX = this.center.x - x;
     const dY = this.center.y - y;
     const norm = Math.sqrt(dX ** 2 + dY ** 2);
     const speed = this.generateRandomNumber(this.word.lowestSpeed, this.word.highestSpeed);
-    const randomWordIndex = arrayOfWords[randomIndex];
     const newWord = new Word(this, x, y, (dX / norm) * speed, (dY / norm) * speed, randomWordIndex);
     this.words = [...this.words, newWord];
   };

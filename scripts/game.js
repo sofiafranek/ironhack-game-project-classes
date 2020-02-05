@@ -16,9 +16,8 @@ class Game {
       font: '20px Lato',
       color: 'black',
       size: 30,
-      highestSpeed: highestSpeed, //1.6,
-      lowestSpeed: lowestSpeed //0.6,
-      // probability: 0.03
+      highestSpeed: highestSpeed,
+      lowestSpeed: lowestSpeed
     };
     this.label = {
       font: '22px Lato',
@@ -254,9 +253,9 @@ class Game {
       this.createWords();
     }
 
-    if (this.counterTimer === 58) {
-      this.createObjects();
-    }
+    // if (this.counterTimer === 58) {
+    //   this.createObjects();
+    // }
 
     if (this.particles) {
       this.particles.processParticles();

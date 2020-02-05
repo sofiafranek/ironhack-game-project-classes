@@ -3,19 +3,31 @@ const difficultOption = () => {
   let selectedValue = difficulty.options['selectedIndex'];
 
   if (selectedValue === 0) {
-    alert('Remember to pick a difficulty!');
+    animateCSS('#startButton', 'jello');
+    setTimeout(() => {
+      alert('Remember to pick a difficulty!');
+    }, 1000);
   }
 
   if (selectedValue === 1) {
-    const game = new Game(canvas, 0.5, 1.5, 1);
-    game.startGame();
+    animateCSS('#startButton', 'hinge');
+    setTimeout(() => {
+      const game = new Game(canvas, 0.5, 1.5, 1);
+      game.startGame();
+    }, 2000);
   }
   if (selectedValue === 2) {
-    const game = new Game(canvas, 1.5, 2.5, 2);
-    game.startGame();
+    animateCSS('#startButton', 'hinge');
+    setTimeout(() => {
+      const game = new Game(canvas, 1.5, 2.5, 2);
+      game.startGame();
+    }, 2000);
   }
   if (selectedValue === 3) {
-    const game = new Game(canvas, 2.5, 3.5, 3);
-    game.startGame();
+    animateCSS('#startButton', 'hinge');
+    setTimeout(() => {
+      const game = new Game(canvas, 2.5, 3.5, 3);
+      game.startGame();
+    }, 2000);
   }
 };

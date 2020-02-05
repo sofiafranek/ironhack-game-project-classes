@@ -17,6 +17,15 @@ const startView = document.querySelector('#startView');
 const gameView = document.querySelector('#gameView');
 const endView = document.querySelector('#endView');
 
+let difficulty = document.getElementById('difficultyOptions');
+let selectedValue = difficulty.options['selectedIndex'];
+
+startButton.disabled = true;
+
 startButton.addEventListener('click', function() {
+  // animateCSS('#startButton', 'hinge');
+  // setTimeout(() => {
+  //   difficultOption();
+  // }, 2000);
   difficultOption();
 });

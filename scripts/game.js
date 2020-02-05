@@ -1,5 +1,5 @@
 class Game {
-  constructor(canvas, highestSpeed, lowestSpeed, maxTime, array) {
+  constructor(canvas, highestSpeed, lowestSpeed, maxTime, level) {
     this.canvas = canvas;
     this.context = canvas.getContext('2d');
     this.counterTimer = 0;
@@ -42,8 +42,9 @@ class Game {
     this.isRunning = true;
     this.maxTime = maxTime;
     this.allIndex = [];
-    this.createWordLength();
-    this.array = array;
+    // this.createWordLength();
+    // this.array = array;
+    this.level = level;
   }
 
   startGame() {
@@ -72,33 +73,29 @@ class Game {
     this.startingTheTimer();
   };
 
-  createWordLength = () => {
-    const novieArr = [];
-    const intermediateArr = [];
-    const expertArr = [];
+  // createWordLength = () => {
+  //   for (const element in arrayOfWords) {
+  //     let strLength = arrayOfWords[element].length;
+  //     // console.log(`${element}: ${arrayOfWords[element]} : ${strLength}`);
 
-    for (const element in arrayOfWords) {
-      let strLength = arrayOfWords[element].length;
-      // console.log(`${element}: ${arrayOfWords[element]} : ${strLength}`);
+  //     if (strLength <= 5) {
+  //       let noviceWords = arrayOfWords[element];
+  //       this.array = novieArr.push(noviceWords);
+  //     }
+  //     if (strLength > 5 && strLength <= 10) {
+  //       let intermediateWords = arrayOfWords[element];
+  //       this.array = intermediateArr.push(intermediateWords);
+  //     }
+  //     if (strLength > 10) {
+  //       let expertWords = arrayOfWords[element];
+  //       this.array = expertArr.push(expertWords);
+  //     }
 
-      if (strLength <= 5) {
-        let noviceWords = arrayOfWords[element];
-        novieArr.push(noviceWords);
-      }
-      if (strLength > 5 && strLength <= 10) {
-        let intermediateWords = arrayOfWords[element];
-        intermediateArr.push(intermediateWords);
-      }
-      if (strLength > 10) {
-        let expertWords = arrayOfWords[element];
-        expertArr.push(expertWords);
-      }
-
-      console.log(novieArr);
-      console.log(intermediateArr);
-      console.log(expertArr);
-    }
-  };
+  //     console.log(novieArr);
+  //     console.log(intermediateArr);
+  //     console.log(expertArr);
+  //   }
+  // };
 
   createWords = () => {
     const x = Math.random() * this.canvas.width;
@@ -114,12 +111,46 @@ class Game {
     const randomWordIndex = arrayOfWords[randomIndex];
     // console.log(randomWordIndex);
 
-    const dX = this.center.x - x;
-    const dY = this.center.y - y;
-    const norm = Math.sqrt(dX ** 2 + dY ** 2);
-    const speed = this.generateRandomNumber(this.word.lowestSpeed, this.word.highestSpeed);
-    const newWord = new Word(this, x, y, (dX / norm) * speed, (dY / norm) * speed, randomWordIndex);
-    this.words = [...this.words, newWord];
+    //before creating, we need to make sure that randomWordIndex satisfies a set of conditions
+    //one: the value should not be in the this.words array.
+    //two: the length of the value should be such that satisfies the needed length for the level
+    if (this.words.indexOf(randomWordIndex) < 0) {
+      console.log('index');
+      //this means that the word is not in my array of words
+      //need to check the length
+      switch (this.level) {
+        case 1:
+          if (randomWordIndex.length < 5) {
+            return randomWordIndex;
+          }
+          break;
+        case 2:
+          if (randomWordIndex.length < 10) {
+            return randomWordIndex;
+          }
+          break;
+        case 3:
+          if (randomWordIndex.length < 15) {
+            return randomWordIndex;
+          }
+          break;
+      }
+      const dX = this.center.x - x;
+      const dY = this.center.y - y;
+      const norm = Math.sqrt(dX ** 2 + dY ** 2);
+      const speed = this.generateRandomNumber(this.word.lowestSpeed, this.word.highestSpeed);
+      const newWord = new Word(
+        this,
+        x,
+        y,
+        (dX / norm) * speed,
+        (dY / norm) * speed,
+        randomWordIndex
+      );
+      this.words = [...this.words, newWord];
+    } else {
+      this.createWords();
+    }
   };
 
   type = i => {

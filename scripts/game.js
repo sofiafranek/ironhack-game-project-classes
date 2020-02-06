@@ -15,7 +15,7 @@ class Game {
     this.word = {
       font: '20px Lato',
       color: 'black',
-      size: 30,
+      size: 32,
       highestSpeed: highestSpeed,
       lowestSpeed: lowestSpeed
     };

@@ -1,9 +1,9 @@
 class Game {
-  constructor(canvas, highestSpeed, lowestSpeed, level) {
+  constructor(canvas, highestSpeed, lowestSpeed, level, gameLength, gameSpeed) {
     this.canvas = canvas;
     this.context = canvas.getContext('2d');
-    this.counterTimer = 60;
-    this.time = 60;
+    this.counterTimer = gameLength;
+    this.time = gameLength;
     this.wpm = 0;
     this.totalCorrectCharacters = 0;
     this.totalWrongCharacters = 0;
@@ -36,7 +36,7 @@ class Game {
     this.score = 0;
     this.checkWordMatch();
     this.keyDownHandler();
-    this.gameSpeed = 400;
+    this.gameSpeed = gameSpeed;
     this.gameTime = 0;
     this.isRunning = true;
     this.array;
@@ -44,6 +44,26 @@ class Game {
     this.novieArr = [];
     this.intermediateArr = [];
     this.expertArr = [];
+    this.bonusArr = [];
+    this.bonusBonusArr = [
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+      '7',
+      '8',
+      '9',
+      '0',
+      '!',
+      '@',
+      '£',
+      '%',
+      '&',
+      '(',
+      ')'
+    ];
     this.createWordLength();
   }
 
@@ -56,13 +76,16 @@ class Game {
   }
 
   startingTheTimer = () => {
-    this.counterTimer = 60;
+    // this.counterTimer = gameLength;
     const timer = setInterval(() => {
       this.counterTimer -= 1;
       this.time = this.counterTimer;
+      if (this.counterTimer === 10) {
+        this.label.color = 'red';
+      }
       if (this.counterTimer === 0) {
         clearInterval(timer);
-        this.counterTimer = 60;
+        // this.counterTimer = gameLength;
         this.endResults();
         this.isRunning = !this.isRunning;
       }
@@ -78,7 +101,7 @@ class Game {
     for (const element in arrayOfWords) {
       let strLength = arrayOfWords[element].length;
 
-      if (strLength <= 5) {
+      if (strLength <= 5 && strLength > 2) {
         let noviceWords = arrayOfWords[element];
         this.novieArr.push(noviceWords);
       }
@@ -90,19 +113,17 @@ class Game {
         let expertWords = arrayOfWords[element];
         this.expertArr.push(expertWords);
       }
+      if (strLength === 1) {
+        let bonusWords = arrayOfWords[element];
+        this.bonusArr.push(bonusWords);
+      }
     }
-  };
-
-  drawObject = () => {
-    this.context.drawImage(image, this.x, this.y, 50, 50);
   };
 
   // creation of words that will be drawn on the canvas
   createWords = () => {
     const x = Math.random() * this.canvas.width;
     const y = Math.random() * this.canvas.height;
-
-    const randomIndex = Math.floor(Math.random() * this.words.length);
 
     // choosing which array to use depending on level selection
     switch (this.level) {
@@ -115,19 +136,21 @@ class Game {
       case 3:
         this.array = this.expertArr;
         break;
+      case 4:
+        this.array = this.bonusArr;
+        break;
+      case 5:
+        this.array = this.bonusBonusArr;
+        break;
     }
 
+    const randomIndex = Math.floor(Math.random() * this.array.length);
     let randomWordIndex = this.array[randomIndex];
 
     // removes duplicate indexes
-    if (randomIndex > -1) {
+    if (randomIndex > -1 && !this.bonusArr) {
       this.array.splice(randomIndex, 1);
     }
-
-    // if (randomIndex === 0) {
-    //   randomWordIndex = this.drawObject();
-    //   console.log(randomWordIndex);
-    // }
 
     const dX = this.center.x - x;
     const dY = this.center.y - y;
@@ -152,7 +175,7 @@ class Game {
 
   keyDownHandler() {
     window.addEventListener('keydown', e => {
-      if (this.isRunning && e.keyCode >= 65 && e.keyCode <= 90) {
+      if (this.isRunning && e.keyCode >= 48 && e.keyCode <= 90) {
         this.string += e.key;
       }
       if (e.keyCode === 8) {
@@ -183,12 +206,12 @@ class Game {
             break;
           }
         }
-        if (foundWord === -1 || foundWord === 1) {
+        if (foundWord > 0 || foundWord < 0) {
           this.wrongKeystrokes.push(this.string);
           animateCSS('#typedWords', 'shake');
           setTimeout(() => {
             this.string = '';
-          }, 500);
+          }, 300);
         }
       }
     });
@@ -214,11 +237,18 @@ class Game {
   // all results to be printed to the HTML
   endResults = () => {
     this.totalCharacters();
-    wpmResult.innerHTML = `Word Per Minute: ${this.wpm}`;
-    accuracy.innerHTML = `Accuracy: ${this.accuracy}%`;
-    totalKeystrokes.innerHTML = `Total Keystrokes: ${this.totalKeyStrokes}`;
-    rightKeystroke.innerHTML = `${this.totalCorrectCharacters}`;
-    wrongKeystroke.innerHTML = `${this.totalWrongCharacters}`;
+    if (this.level === 4 || this.level === 5) {
+      accuracy.innerHTML = `Accuracy: ${this.accuracy}%`;
+      totalKeystrokes.innerHTML = `Total Keystrokes: ${this.totalKeyStrokes}`;
+      rightKeystroke.innerHTML = `${this.totalCorrectCharacters}`;
+      wrongKeystroke.innerHTML = `${this.totalWrongCharacters}`;
+    } else {
+      wpmResult.innerHTML = `Word Per Minute: ${this.wpm}`;
+      accuracy.innerHTML = `Accuracy: ${this.accuracy}%`;
+      totalKeystrokes.innerHTML = `Total Keystrokes: ${this.totalKeyStrokes}`;
+      rightKeystroke.innerHTML = `${this.totalCorrectCharacters}`;
+      wrongKeystroke.innerHTML = `${this.totalWrongCharacters}`;
+    }
     gameView.style.display = 'none';
     endView.style.display = 'block';
   };

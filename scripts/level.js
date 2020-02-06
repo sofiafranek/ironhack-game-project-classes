@@ -6,7 +6,6 @@ const difficultOption = () => {
     animateCSS('#startButton', 'jello');
     setTimeout(() => {
       message.style.display = 'block';
-      // alert('Remember to pick a difficulty!');
     }, 500);
   }
 

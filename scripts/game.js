@@ -2,8 +2,8 @@ class Game {
   constructor(canvas, highestSpeed, lowestSpeed, level) {
     this.canvas = canvas;
     this.context = canvas.getContext('2d');
-    this.counterTimer = 60;
-    this.time = 60;
+    this.counterTimer = 10;
+    this.time = 10;
     this.wpm = 0;
     this.totalCorrectCharacters = 0;
     this.totalWrongCharacters = 0;
@@ -56,19 +56,18 @@ class Game {
   }
 
   startingTheTimer = () => {
-    this.counterTimer = 60;
+    this.counterTimer = 10;
     const timer = setInterval(() => {
       this.counterTimer -= 1;
       this.time = this.counterTimer;
       if (this.counterTimer === 0) {
         clearInterval(timer);
-        this.counterTimer = 60;
+        this.counterTimer = 10;
         this.endResults();
         this.isRunning = !this.isRunning;
+      } else if (this.counterTimer === 58) {
+        this.createObjects();
       }
-      // else if (this.counterTimer === 58) {
-      //   this.createObjects();
-      // }
     }, 1000);
   };
 
@@ -84,7 +83,6 @@ class Game {
     const norm = Math.sqrt(dX ** 2 + dY ** 2);
     const speed = this.generateRandomNumber(this.word.lowestSpeed, this.word.highestSpeed);
     const object = new Object(this, (dX / norm) * speed, (dY / norm) * speed, speed);
-
     console.log(object);
     this.snow = object;
   };

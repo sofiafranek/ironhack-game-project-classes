@@ -67,6 +67,7 @@ class Game {
     this.createWordLength();
   }
 
+  // function called when start button is clicked on start page
   startGame() {
     startView.style.display = 'none';
     gameView.style.display = 'block';
@@ -76,8 +77,12 @@ class Game {
     this.boom = false;
   }
 
+  timerInit = () => {
+    this.startingTheTimer();
+  };
+
+  // Decrementing the timer depending on counterTimer value put into the Game class
   startingTheTimer = () => {
-    // this.counterTimer = gameLength;
     const timer = setInterval(() => {
       this.counterTimer -= 1;
       this.time = this.counterTimer;
@@ -102,10 +107,6 @@ class Game {
         this.isRunning = !this.isRunning;
       }
     }, 1000);
-  };
-
-  timerInit = () => {
-    this.startingTheTimer();
   };
 
   // dividing arrayOfWords into seperate arrays

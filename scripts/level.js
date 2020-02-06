@@ -13,7 +13,7 @@ const difficultOption = () => {
     message.style.display = 'none';
     animateCSS('#startButton', 'hinge');
     setTimeout(() => {
-      const game = new Game(canvas, 0.5, 1.5, 1, 60, 300);
+      const game = new Game(canvas, 0.5, 1.5, 1, 60, 400);
       game.startGame();
     }, 2000);
   }
@@ -21,7 +21,7 @@ const difficultOption = () => {
     message.style.display = 'none';
     animateCSS('#startButton', 'hinge');
     setTimeout(() => {
-      const game = new Game(canvas, 1.5, 2.5, 2, 60, 300);
+      const game = new Game(canvas, 1.5, 2.5, 2, 60, 500);
       game.startGame();
     }, 2000);
   }
@@ -29,7 +29,7 @@ const difficultOption = () => {
     message.style.display = 'none';
     animateCSS('#startButton', 'hinge');
     setTimeout(() => {
-      const game = new Game(canvas, 2.5, 3.5, 3, 60, 200);
+      const game = new Game(canvas, 2.5, 3.5, 3, 60, 600);
       game.startGame();
     }, 2000);
   }

@@ -70,6 +70,7 @@ class Game {
   startGame() {
     startView.style.display = 'none';
     gameView.style.display = 'block';
+    audio.play();
     this.timerInit();
     this.loop();
     this.boom = false;

@@ -45,6 +45,11 @@ p {
   line-height: 30px;
 }
 
+.moon {
+  border: none;
+  background-color: transparent;
+}
+
 #typedWords {
   position: absolute;
   top: 10px;

@@ -21,6 +21,8 @@ const endView = document.querySelector('#endView');
 let difficulty = document.getElementById('difficultyOptions');
 let selectedValue = difficulty.options['selectedIndex'];
 
+let audio = new Audio('Firework - Katy Perry (Lyrics).mp3');
+
 startButton.addEventListener('click', function() {
   difficultOption();
 });

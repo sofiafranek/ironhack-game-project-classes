@@ -5,6 +5,8 @@ canvas.height = window.innerHeight;
 
 const startButton = document.querySelector('#startButton');
 let typedWords = document.querySelector('#typedWords');
+let score = document.querySelector('#score');
+let timer = document.querySelector('#timer');
 let wpmResult = document.querySelector('#wpmResult');
 let rightKeystroke = document.querySelector('#rightKeystrokes');
 let wrongKeystroke = document.querySelector('#wrongKeystrokes');

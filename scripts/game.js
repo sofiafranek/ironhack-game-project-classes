@@ -81,12 +81,23 @@ class Game {
     const timer = setInterval(() => {
       this.counterTimer -= 1;
       this.time = this.counterTimer;
-      if (this.counterTimer === 10) {
-        this.label.color = 'red';
+      if (this.counterTimer === 5) {
+        animateCSS('#timer', 'pulse');
+      }
+      if (this.counterTimer === 4) {
+        animateCSS('#timer', 'pulse');
+      }
+      if (this.counterTimer === 3) {
+        animateCSS('#timer', 'pulse');
+      }
+      if (this.counterTimer === 2) {
+        animateCSS('#timer', 'pulse');
+      }
+      if (this.counterTimer === 1) {
+        animateCSS('#timer', 'pulse');
       }
       if (this.counterTimer === 0) {
         clearInterval(timer);
-        // this.counterTimer = gameLength;
         this.endResults();
         this.isRunning = !this.isRunning;
       }
@@ -279,11 +290,10 @@ class Game {
       this.particles.processParticles();
       this.particles.paintParticles();
     }
-    ctx.font = this.label.font;
-    ctx.fillStyle = this.label.color;
-    ctx.fillText('Score: ' + this.score, this.label.left, this.label.margin);
+
     typedWords.innerHTML = `${this.string}`;
-    ctx.fillText('Timer: ' + this.time, this.label.right, this.label.margin);
+    score.innerHTML = `Score: ${this.score}`;
+    timer.innerHTML = `${this.time}`;
 
     if (this.isRunning) {
       window.requestAnimationFrame(this.loop);

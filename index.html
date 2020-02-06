@@ -11,7 +11,7 @@
   <body>
     <div class="background" id="startView">
       <div class="inner">
-        <h1 class="animated bounce">Hyper Typer</h1>
+        <h1 class="slowAnimated bounce">Hyper Typer</h1>
         <h3>Try and type as many words as you can in 1 minute.</h3>
         <p>
           Words are appearing from all directions of the screen, type the word and press ENTER or
@@ -31,20 +31,22 @@
             <option value="bonus">Bonus</option>
             <option value="bonus">Bonus Bonus</option>
           </select>
-          <p class="animated shake" id="message">Remember to pick a difficulty!</p>
+          <p class="slowAnimated shake" id="message">Remember to pick a difficulty!</p>
         </div>
 
-        <div class="button_slide slide_right animated" id="startButton">START</div>
+        <div class="button_slide slide_right slowAnimated" id="startButton">START</div>
       </div>
     </div>
 
     <div id="gameView">
       <canvas id="canvas">Your browser doesn't support HTML5.</canvas>
+      <div id="score"></div>
       <div id="typedWords"></div>
+      <div id="timer"></div>
     </div>
 
     <div id="endView">
-      <h1 class="animated flash">Results</h1>
+      <h1 class="slowAnimated flash">Results</h1>
       <h3>
         Let's see how well you did.
       </h3>
@@ -58,7 +60,7 @@
       </div>
       <div
         type="button"
-        class="button_slide slide_right animated"
+        class="button_slide slide_right"
         id="startAgainButton"
         onclick="location.reload();"
       >

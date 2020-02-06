@@ -52,7 +52,7 @@ p {
 
 #typedWords {
   position: absolute;
-  top: 10px;
+  top: 20px;
   left: 0;
   right: 0;
   margin-left: auto;
@@ -62,11 +62,66 @@ p {
   letter-spacing: 1px;
 }
 
+#score {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  z-index: 99;
+  font-size: 2em;
+  letter-spacing: 1px;
+}
+
+#timer {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 2em;
+  letter-spacing: 1px;
+}
+
 .animated {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.slowAnimated {
   -webkit-animation-duration: 1s;
   animation-duration: 1s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
+}
+
+@-webkit-keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(2, 2, 2);
+    transform: scale3d(2, 2, 2);
+  }
+}
+
+@keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(2, 2, 2);
+    transform: scale3d(2, 2, 2);
+  }
+}
+
+.pulse {
+  -webkit-animation-name: pulse;
+  animation-name: pulse;
+  color: #ff3333;
 }
 
 @-webkit-keyframes hinge {

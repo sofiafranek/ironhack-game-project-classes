@@ -2,8 +2,8 @@ class Game {
   constructor(canvas, highestSpeed, lowestSpeed, level) {
     this.canvas = canvas;
     this.context = canvas.getContext('2d');
-    this.counterTimer = 10;
-    this.time = 10;
+    this.counterTimer = 60;
+    this.time = 60;
     this.wpm = 0;
     this.totalCorrectCharacters = 0;
     this.totalWrongCharacters = 0;
@@ -56,35 +56,21 @@ class Game {
   }
 
   startingTheTimer = () => {
-    this.counterTimer = 10;
+    this.counterTimer = 60;
     const timer = setInterval(() => {
       this.counterTimer -= 1;
       this.time = this.counterTimer;
       if (this.counterTimer === 0) {
         clearInterval(timer);
-        this.counterTimer = 10;
+        this.counterTimer = 60;
         this.endResults();
         this.isRunning = !this.isRunning;
-      } else if (this.counterTimer === 58) {
-        this.createObjects();
       }
     }, 1000);
   };
 
   timerInit = () => {
     this.startingTheTimer();
-  };
-
-  createObjects = () => {
-    const x = Math.random() * this.canvas.width;
-    const y = Math.random() * this.canvas.height;
-    const dX = this.center.x - x;
-    const dY = this.center.y - y;
-    const norm = Math.sqrt(dX ** 2 + dY ** 2);
-    const speed = this.generateRandomNumber(this.word.lowestSpeed, this.word.highestSpeed);
-    const object = new Object(this, (dX / norm) * speed, (dY / norm) * speed, speed);
-    console.log(object);
-    this.snow = object;
   };
 
   // dividing arrayOfWords into seperate arrays
@@ -107,6 +93,10 @@ class Game {
     }
   };
 
+  drawObject = () => {
+    this.context.drawImage(image, this.x, this.y, 50, 50);
+  };
+
   // creation of words that will be drawn on the canvas
   createWords = () => {
     const x = Math.random() * this.canvas.width;
@@ -127,12 +117,17 @@ class Game {
         break;
     }
 
+    let randomWordIndex = this.array[randomIndex];
+
     // removes duplicate indexes
     if (randomIndex > -1) {
       this.array.splice(randomIndex, 1);
     }
 
-    const randomWordIndex = this.array[randomIndex];
+    // if (randomIndex === 0) {
+    //   randomWordIndex = this.drawObject();
+    //   console.log(randomWordIndex);
+    // }
 
     const dX = this.center.x - x;
     const dY = this.center.y - y;
@@ -238,9 +233,7 @@ class Game {
       w.moveWord();
     }
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    if (this.snow) {
-      this.snow.drawObject();
-    }
+
     ctx.font = this.word.font;
     ctx.fillStyle = this.word.color;
     for (let w of this.words) {
@@ -250,10 +243,6 @@ class Game {
       this.gameTime = timestamp;
       this.createWords();
     }
-
-    // if (this.counterTimer === 58) {
-    //   this.createObjects();
-    // }
 
     if (this.particles) {
       this.particles.processParticles();

@@ -1,4 +1,5 @@
 let arrayOfWords = [
+  'FREEZE',
   'whip',
   'inch',
   'nail',

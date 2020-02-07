@@ -205,6 +205,7 @@ class Game {
     });
   }
 
+  // checking the input word from user to strings in the array
   checkWordMatch() {
     window.addEventListener('keydown', e => {
       let foundWord = 0;
@@ -278,6 +279,7 @@ class Game {
     return min + Math.random() * (max - min);
   };
 
+  // my loop to get the words moving and clear the canvas
   loop = timestamp => {
     const ctx = this.context;
     for (let w of this.words) {
@@ -310,6 +312,7 @@ class Game {
   };
 }
 
+// adding and removing my animation classes
 const animateCSS = (element, animationName, callback) => {
   const node = document.querySelector(element);
   node.classList.add('animated', animationName);

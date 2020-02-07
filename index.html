@@ -14,24 +14,71 @@
         <h1 class="slowAnimated bounce">Hyper Typer</h1>
         <h3>Try and type as many words as you can in 1 minute.</h3>
         <p>
-          Words of different lengths are appearing from all directions of the screen, type the word
-          and press ENTER or SPACEBAR and keep typing until the timer runs out.
+          Words are appearing from all directions of the screen, type the word and press ENTER or
+          SPACEBAR and keep typing until the timer runs out.
         </p>
         <h5>
-          * Bonus levels our 30 seconds and are only single characters
+          * Each level will have a different number of characters including letters, numbers &
+          special symbols
         </h5>
 
         <div class="options">
           <label for="difficultyOptions">Choose a difficulty:</label>
-          <select id="difficultyOptions">
+          <select
+            id="difficultyOptions"
+            onchange="difficultlyChange(this.options[this.selectedIndex].value)"
+          >
             <option value="difficultyOptions">--Please choose an option--</option>
             <option value="novice">Novice</option>
             <option value="intermediate">Intermediate</option>
             <option value="expert">Expert</option>
             <option value="bonus">Bonus</option>
-            <option value="bonus">Bonus Bonus</option>
+            <option value="bonus bonus">Bonus Bonus</option>
+            <option value="super bonus">Super Bonus</option>
           </select>
           <p class="slowAnimated shake" id="message">Remember to pick a difficulty!</p>
+        </div>
+
+        <div class="instruct slowAnimated jello" id="noviceInstruct">
+          <p>
+            Great! You have selected the Novice level. The words will have less than 5 characters
+            and will be moving relatively slowly. Good luck!
+          </p>
+        </div>
+
+        <div class="instruct slowAnimated jello" id="intermediateInstruct">
+          <p>
+            Amazing! You have selected the Intermediate level. The words will have between 5 and 10
+            characters and will be moving a little faster than Novice. Good luck!
+          </p>
+        </div>
+
+        <div class="instruct slowAnimated jello" id="expertInstruct">
+          <p>
+            Excellent! You have selected the Expert level. The words will have more than 6
+            characters and will be moving a fast to try and catch them. Good luck!
+          </p>
+        </div>
+
+        <div class="instruct slowAnimated jello" id="bonusInstruct">
+          <p>
+            Fabulous! You have selected the Bonus level. This level is fast and only has single
+            characters but... it is case sensitive so look out for capital letters. Good luck!
+          </p>
+        </div>
+
+        <div class="instruct slowAnimated jello" id="bonusbonusInstruct">
+          <p>
+            Brilliant! You have selected the Bonus Bonus level. This level is fast and only has
+            single characters but... it is special symbols & numbers only so look outv. Good luck!
+          </p>
+        </div>
+
+        <div class="instruct slowAnimated jello" id="superbonusInstruct">
+          <p>
+            Exquisite! You have selected the Super Bonus level. This level is really hard and the
+            strongest will only survive. Good luck!
+          </p>
         </div>
 
         <div class="button_slide slide_right slowAnimated" id="startButton">START</div>

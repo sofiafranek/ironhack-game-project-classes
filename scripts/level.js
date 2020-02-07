@@ -49,4 +49,12 @@ const difficultOption = () => {
       game.startGame();
     }, 2000);
   }
+  if (selectedValue === 6) {
+    message.style.display = 'none';
+    animateCSS('#startButton', 'hinge');
+    setTimeout(() => {
+      const game = new Game(canvas, 0.5, 2.5, 6, 30, 100);
+      game.startGame();
+    }, 2000);
+  }
 };

@@ -34,7 +34,7 @@ h3 {
 }
 
 h5 {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 p {
@@ -48,6 +48,20 @@ p {
 .moon {
   border: none;
   background-color: transparent;
+}
+
+.instruct {
+  display: none;
+}
+
+.instruct p {
+  color: #1a75ff;
+  font-weight: initial;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
 }
 
 #typedWords {
@@ -139,12 +153,12 @@ label {
 #message {
   display: none;
   position: absolute;
-  top: 10px;
+  top: 15px;
   left: 0;
   right: 0;
   margin-left: 0;
   margin-right: 0;
-  font-size: 0.8em;
+  font-size: 0.9em;
 }
 
 .options {
@@ -161,7 +175,7 @@ label {
 
 .button_slide {
   letter-spacing: 2px;
-  margin-top: 55px;
+  margin-top: 90px;
   color: black;
   border: 3px solid #1a75ff;
   border-radius: 0px;

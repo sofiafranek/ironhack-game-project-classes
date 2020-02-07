@@ -64,6 +64,7 @@ class Game {
       '(',
       ')'
     ];
+    this.lastArr = [];
     this.createWordLength();
   }
 
@@ -130,6 +131,10 @@ class Game {
         let bonusWords = arrayOfWords[element];
         this.bonusArr.push(bonusWords);
       }
+      if (strLength >= 1) {
+        let lastArr = arrayOfWords[element];
+        this.lastArr.push(lastArr);
+      }
     }
   };
 
@@ -154,6 +159,9 @@ class Game {
         break;
       case 5:
         this.array = this.bonusBonusArr;
+        break;
+      case 6:
+        this.array = this.lastArr;
         break;
     }
 
@@ -250,7 +258,7 @@ class Game {
   // all results to be printed to the HTML
   endResults = () => {
     this.totalCharacters();
-    if (this.level === 4 || this.level === 5) {
+    if (this.level === 4 || this.level === 5 || this.level === 6) {
       accuracy.innerHTML = `Accuracy: ${this.accuracy}%`;
       totalKeystrokes.innerHTML = `Total Keystrokes: ${this.totalKeyStrokes}`;
       rightKeystroke.innerHTML = `${this.totalCorrectCharacters}`;

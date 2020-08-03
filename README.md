@@ -1,1 +1,3 @@
-# ironhack-game-project-classes
+# ironhack-hyper-typer
+
+https://hyper-typer.netlify.app/
